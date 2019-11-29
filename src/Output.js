@@ -18,5 +18,5 @@ const mapStateToProps = ({ postCustomPricingReducer }) => {
 
 export default connect(
   mapStateToProps,
-  { },
+  null,
 )(Output)
