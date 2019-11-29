@@ -163,7 +163,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   const renderButton = () => {
     return (
-      <button className="button is-primary is-pulled-right" disabled={quantityValid ? '' : 'disabled'} onClick={handleSubmit}>
+      <button className="button is-primary is-pulled-right" disabled={quantity ? '' : 'disabled'} onClick={handleSubmit}>
         Provide quote
       </button>
     )
