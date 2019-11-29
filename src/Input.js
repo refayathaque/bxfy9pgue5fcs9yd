@@ -157,10 +157,23 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     )
   }
 
+  const handleSubmit = () => {
+    postCustomPricing(quantity, largeSizedItemQuantity, totalDiscountPercentage, totalDiscountValue, extraChargePerSqFt, sqFt)
+  }
+
+  const renderButton = () => {
+    return (
+      <button className="button is-primary is-pulled-right" disabled={quantityValid ? '' : 'disabled'} onClick={handleSubmit}>
+        Provide quote
+      </button>
+    )
+  }
+
   return (
     <React.Fragment>
       <h4 className="subtitle is-4">Submit the form below to receive both monthly and yearly quotes for your prospective customer:</h4>
       {renderForm()}
+      {renderButton()}
     </React.Fragment>
   )
 }
