@@ -1,7 +1,7 @@
 import { POST_CUSTOM_PRICING_REQUESTED, POST_CUSTOM_PRICING_RECEIVED, POST_CUSTOM_PRICING_FAILED } from './types';
 import axios from 'axios';
 
-const postCustomPricing = () => {
+const postCustomPricing = (quantity, largeSizedItemQuantity, totalDiscountPercentage, totalDiscountValue, extraChargePerSqFt, sqFt) => {
   return async (dispatch) => {
 
     dispatch({
@@ -13,7 +13,12 @@ const postCustomPricing = () => {
     const apiGatewayResource = '';
 
     const data = {
-
+      quantity: quantity,
+      largeSizedItemQuantity: largeSizedItemQuantity,
+      totalDiscountPercentage: totalDiscountPercentage,
+      totalDiscountValue: totalDiscountValue,
+      extraChargePerSqFt: extraChargePerSqFt,
+      sqFt: sqFt
     }
 
     try {

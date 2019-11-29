@@ -24,12 +24,12 @@ const App = () => {
 
   const renderBody = () => {
     return (
-      <div className="container">
-        <div class="columns">
-          <div class="column">
+      <div className="container" style={{ padding: '1rem 0rem 1rem 0rem' }}>
+        <div className="columns">
+          <div className="column">
             <Input />
           </div>
-          <div class="column">
+          <div className="column">
             <Output />
           </div>
         </div>
@@ -39,8 +39,8 @@ const App = () => {
 
   const renderFooter = () => {
     return (
-      <footer class="footer">
-        <div class="content has-text-centered">
+      <footer className="footer">
+        <div className="content has-text-centered">
           <p>
             <strong>API Interview Question V2</strong> / <a href="https://www.linkedin.com/in/refayathaque" target="_blank">Refayat Haque</a> \ <span><a href="https://github.com/refayathaque/bxfy9pgue5fcs9yd" target="_blank" className="is-inline icon">
               <i className="fab fa-2x fa-github"></i>
