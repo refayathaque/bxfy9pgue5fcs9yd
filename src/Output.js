@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 const Output = () => {
   return (
-    <div>
+    <React.Fragment>
       Output
-    </div>
+    </React.Fragment>
   )
 }
 

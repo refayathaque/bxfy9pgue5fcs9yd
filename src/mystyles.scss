@@ -1,2 +1,9 @@
 @charset "utf-8";
+
+$subtitle: #4A4A4A;
+$warning: #FFDD57;
+
+$footer-background-color: $warning;
+$footer-color: $subtitle;
+
 @import "../node_modules/bulma/bulma.sass";

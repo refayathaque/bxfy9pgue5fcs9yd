@@ -11,14 +11,10 @@ const App = () => {
         <div className="hero-body">
           <div className="container">
             <h1 className="title">
-              API Interview Question V2 <span><a href="" target="_blank" className="is-inline icon">
-                <i className="fab fa-lg fa-github"></i>
-              </a></span>
+              Second Closet
             </h1>
             <h2 className="subtitle">
-              Refayat Haque <span><a href="" target="_blank" className="is-inline icon">
-                <i className="fab fa-lg fa-linkedin"></i>
-              </a></span> - "Senior Backend Engineer" candidate
+              Sales Team Pricing Calculator
             </h2>
           </div>
         </div>
@@ -41,10 +37,25 @@ const App = () => {
     )
   }
 
+  const renderFooter = () => {
+    return (
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>API Interview Question V2</strong> / <a href="https://www.linkedin.com/in/refayathaque" target="_blank">Refayat Haque</a> \ <span><a href="https://github.com/refayathaque/bxfy9pgue5fcs9yd" target="_blank" className="is-inline icon">
+              <i className="fab fa-2x fa-github"></i>
+            </a></span>
+          </p>
+        </div>
+      </footer>
+    )
+  }
+
   return (
     <React.Fragment>
       {renderHeader()}
       {renderBody()}
+      {renderFooter()}
     </React.Fragment>
   );
 }
