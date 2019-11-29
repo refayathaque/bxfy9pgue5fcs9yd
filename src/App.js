@@ -1,5 +1,7 @@
 import React from 'react';
 import './mystyles.scss';
+import Input from './Input';
+import Output from './Output';
 
 const App = () => {
 
@@ -24,31 +26,15 @@ const App = () => {
     )
   }
 
-  const renderInput = () => {
-    return (
-      <div>
-        Input
-      </div>
-    )
-  }
-
-  const renderOutput = () => {
-    return (
-      <div>
-        Output
-      </div>
-    )
-  }
-
   const renderBody = () => {
     return (
       <div className="container">
         <div class="columns">
           <div class="column">
-            {renderInput()}
+            <Input />
           </div>
           <div class="column">
-            {renderOutput()}
+            <Output />
           </div>
         </div>
       </div>
@@ -56,10 +42,10 @@ const App = () => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       {renderHeader()}
       {renderBody()}
-    </div>
+    </React.Fragment>
   );
 }
 
