@@ -137,6 +137,31 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     setStgPrcRemainingPercentageDiscount(value)
   }
 
+  const renderExtraChargeSqFt = () => {
+    return (
+      <React.Fragment>
+        <div className="field is-grouped">
+          <div className="control is-expanded">
+            <label className="label">Per square foot charge</label>
+            <input className={extraChargePerSqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={extraChargePerSqFt} onChange={event => handleExtraChargePerSqFt(event.target.value)} />
+          </div>
+          {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $10</p>}
+
+          <div className="control is-expanded">
+            <label className="label">Square footage</label>
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+          </div>
+          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+
+          <div className="control is-expanded">
+            <label className="label">Reason for extra charge</label>
+            <input className={largeSizedItemQuantityValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={largeSizedItemQuantity} onChange={event => handleLargeSizedItemQuantity(event.target.value)} />
+          </div>
+          {largeSizedItemQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than or equal to the 'Quantity' above</p>}
+        </div>
+      </React.Fragment>
+    )
+  }
 
   const renderStaggeredPricing = () => {
     return (
@@ -201,14 +226,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
         </div>
 
         <div className="field">
-          <label className="label">If any of the items above are considered 'Large', specify their quantity</label>
-          <div className="control">
-            <input className={largeSizedItemQuantityValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={largeSizedItemQuantity} onChange={event => handleLargeSizedItemQuantity(event.target.value)} />
-          </div>
-          {largeSizedItemQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than or equal to the 'Quantity' above</p>}
-        </div>
-
-        <div className="field">
           <label className="label">Apply a percentage discount on the entire quote</label>
           <div className="control">
             <input className={totalDiscountPercentageValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={totalDiscountPercentage} onChange={event => handleTotalDiscountPercentage(event.target.value)} />
@@ -224,22 +241,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
         </div>
 
-        <div className="field">
-          <label className="label">Apply a per square foot charge for items</label>
-          <div className="control">
-            <input className={extraChargePerSqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={extraChargePerSqFt} onChange={event => handleExtraChargePerSqFt(event.target.value)} />
-          </div>
-          {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $10</p>}
-        </div>
-
-        <div className="field">
-          <label className="label">Square footage</label>
-          <div className="control">
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-          </div>
-          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
-        </div>
-
+        {renderExtraChargeSqFt()}
         {renderStaggeredPricing()}
       </React.Fragment>
     )
