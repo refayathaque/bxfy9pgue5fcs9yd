@@ -153,6 +153,50 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           </div>
           {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
         </div>
+
+        <h4 className="subtitle is-4">Staggered Pricing</h4>
+
+        <h5 className="subtitle is-5">First set of items</h5>
+        <div className="field is-grouped">
+          <div className="control">
+            <label className="label">Storage quantity</label>
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+          </div>
+          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          <div className="control">
+            <label className="label">Percentage discount</label>
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+          </div>
+          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+        </div>
+
+        <h5 className="subtitle is-5">Second set of items</h5>
+        <div className="field is-grouped">
+          <div className="control">
+            <label className="label">Storage quantity</label>
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+          </div>
+          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          <div className="control">
+            <label className="label">Percentage discount</label>
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+          </div>
+          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+        </div>
+
+        <h5 className="subtitle is-5">Remaining items</h5>
+        <div className="field is-grouped">
+          <div className="control">
+            <label className="label">Storage quantity</label>
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+          </div>
+          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          <div className="control">
+            <label className="label">Percentage discount</label>
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+          </div>
+          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+        </div>
       </React.Fragment>
     )
   }
