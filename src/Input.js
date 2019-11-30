@@ -16,34 +16,26 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const [extraChargePerSqFtValid, setExtraChargePerSqFtValid] = useState(true);
   const [sqFt, setSqFt] = useState('');
   const [sqFtValid, setSqFtValid] = useState(true);
-  const [conditionalDiscount, setConditionalDiscount] = useState({
-    monthlyBillTarget: '',
-    discountValue: '',
-    discountPercentage: ''
-  })
-  const [conditionalDiscountValid, setConditionalDiscountValidValid] = useState(true);
-  const [staggeredPricing, setStaggeredPricing] = useState({
-    hundredItems: {
-      discountValue: '',
-      discountPercentage: '',
-      extraChargePerSqFt: ''
-    },
-    twoHundredItems: {
-      discountValue: '',
-      discountPercentage: '',
-      extraChargePerSqFt: ''
-    },
-    overTwoHundredItems: {
-      discountValue: '',
-      discountPercentage: '',
-      extraChargePerSqFt: ''
-    }
-  })
-  const [staggeredPricingValid, setStaggeredPricingValid] = useState(true);
-  const [pristine, setPristine] = useState(true);
+  // const [conditionalDiscount, setConditionalDiscount] = useState({
+  //   monthlyBillTarget: '',
+  //   discountValue: '',
+  //   discountPercentage: ''
+  // })
+  // const [conditionalDiscountValid, setConditionalDiscountValidValid] = useState(true);
+  const [stgPrcFirstQuantity, setStgPrcFirstQuantity] = useState('')
+  const [stgPrcFirstQuantityValid, setStgPrcFirstQuantityValid] = useState(true);
+  const [stgPrcFirstPercentageDiscount, setStgPrcFirstPercentageDiscount] = useState('')
+  const [stgPrcFirstPercentageDiscountValid, setStgPrcFirstPercentageDiscountValid] = useState(true);
+  const [stgPrcSecondQuantity, setStgPrcSecondQuantity] = useState('')
+  const [stgPrcSecondQuantityValid, setStgPrcSecondQuantityValid] = useState(true);
+  const [stgPrcSecondPercentageDiscount, setStgPrcSecondPercentageDiscount] = useState('')
+  const [stgPrcSecondPercentageDiscountValid, setStgPrcSecondPercentageDiscountValid] = useState(true);
+  const [stgPrcRemainingQuantity, setStgPrcRemainingQuantity] = useState('')
+  const [stgPrcRemainingQuantityValid, setStgPrcRemainingQuantityValid] = useState(true);
+  const [stgPrcRemainingPercentageDiscount, setStgPrcRemainingPercentageDiscount] = useState('')
+  const [stgPrcRemainingPercentageDiscountValid, setStgPrcRemainingPercentageDiscountValid] = useState(true);
 
   const handleQuantity = value => {
-    setPristine(false);
     setQuantity(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value)) {
       // Regex ^ ensures value is a valid number less than 1000
@@ -103,6 +95,100 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     }
   }
 
+  const handleStgPrcFirstQuantity = value => {
+    setStgPrcFirstQuantity(value)
+    if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
+      // Regex ^ ensures value is a valid number less than 1000
+      setStgPrcFirstQuantityValid(true);
+    } else {
+      setStgPrcFirstQuantityValid(false);
+    }
+  }
+
+  const handleStgPrcFirstPercentageDiscount = value => {
+    setStgPrcFirstPercentageDiscount(value)
+  }
+
+  const handleStgPrcSecondQuantity = value => {
+    setStgPrcSecondQuantity(value)
+    if (/^[1-9]([0-9]{0,2}$)/g.test(value) && (parseInt(value) <= (999 - parseInt(stgPrcFirstQuantity))) || !value) {
+      // Regex ^ ensures value is a valid number less than 1000
+      setStgPrcSecondQuantityValid(true);
+    } else {
+      setStgPrcSecondQuantityValid(false);
+    }
+  }
+
+  const handleStgPrcSecondPercentageDiscount = value => {
+    setStgPrcSecondPercentageDiscount(value)
+  }
+
+  const handleStgPrcRemainingQuantity = value => {
+    setStgPrcRemainingQuantity(value)
+    if (/^[1-9]([0-9]{0,2}$)/g.test(value) && (parseInt(value) <= (999 - (parseInt(stgPrcFirstQuantity) + parseInt(stgPrcSecondQuantity)))) || !value) {
+      // Regex ^ ensures value is a valid number less than 1000
+      setStgPrcRemainingQuantityValid(true);
+    } else {
+      setStgPrcRemainingQuantityValid(false);
+    }
+  }
+
+  const handleStgPrcRemainingPercentageDiscount = value => {
+    setStgPrcRemainingPercentageDiscount(value)
+  }
+
+
+  const renderStaggeredPricing = () => {
+    return (
+      <React.Fragment>
+        <h6 className="subtitle is-6">______________________________</h6>
+        <h4 className="subtitle is-4">Staggered Pricing</h4>
+
+        <div className="is-size-5 is-italic">First set of items</div>
+        <div className="field is-grouped">
+          <div className="control is-expanded">
+            <label className="label">Storage quantity</label>
+            <input className={stgPrcFirstQuantityValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity"  value={stgPrcFirstQuantity} onChange={event => handleStgPrcFirstQuantity(event.target.value)} />
+            {stgPrcFirstQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          </div>
+          <div className="control is-expanded">
+            <label className="label">Percentage discount</label>
+            <input className={stgPrcFirstPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={stgPrcFirstPercentageDiscount} onChange={event => handleStgPrcFirstPercentageDiscount(event.target.value)} />
+            {stgPrcFirstPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          </div>
+        </div>
+
+        <div className="is-size-5 is-italic">Second set of items</div>
+        <div className="field is-grouped">
+          <div className="control is-expanded">
+            <label className="label">Storage quantity</label>
+            <input className={stgPrcSecondQuantityValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={stgPrcSecondQuantity} onChange={event => handleStgPrcSecondQuantity(event.target.value)} />
+            {stgPrcSecondQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          </div>
+          <div className="control is-expanded">
+            <label className="label">Percentage discount</label>
+            <input className={stgPrcSecondPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={stgPrcSecondPercentageDiscount} onChange={event => handleStgPrcSecondPercentageDiscount(event.target.value)} />
+            {stgPrcSecondPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          </div>
+        </div>
+
+        <div className="is-size-5 is-italic">Remaining items</div>
+        <div className="field is-grouped">
+          <div className="control is-expanded">
+            <label className="label">Storage quantity</label>
+            <input className={stgPrcRemainingQuantityValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={stgPrcRemainingQuantity} onChange={event => handleStgPrcRemainingQuantity(event.target.value)} />
+            {stgPrcRemainingQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          </div>
+          <div className="control is-expanded">
+            <label className="label">Percentage discount</label>
+            <input className={stgPrcRemainingPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={stgPrcRemainingPercentageDiscount} onChange={event => handleStgPrcRemainingPercentageDiscount(event.target.value)} />
+            {stgPrcRemainingPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
   const renderForm = () => {
     return (
       <React.Fragment>
@@ -154,49 +240,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
         </div>
 
-        <h4 className="subtitle is-4">Staggered Pricing</h4>
-
-        <h5 className="subtitle is-5">First set of items</h5>
-        <div className="field is-grouped">
-          <div className="control">
-            <label className="label">Storage quantity</label>
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-          </div>
-          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
-          <div className="control">
-            <label className="label">Percentage discount</label>
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-          </div>
-          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
-        </div>
-
-        <h5 className="subtitle is-5">Second set of items</h5>
-        <div className="field is-grouped">
-          <div className="control">
-            <label className="label">Storage quantity</label>
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-          </div>
-          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
-          <div className="control">
-            <label className="label">Percentage discount</label>
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-          </div>
-          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
-        </div>
-
-        <h5 className="subtitle is-5">Remaining items</h5>
-        <div className="field is-grouped">
-          <div className="control">
-            <label className="label">Storage quantity</label>
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-          </div>
-          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
-          <div className="control">
-            <label className="label">Percentage discount</label>
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="Standard Sized Item Quantity" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-          </div>
-          {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1000</p>}
-        </div>
+        {renderStaggeredPricing()}
       </React.Fragment>
     )
   }
@@ -207,9 +251,12 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   const renderButton = () => {
     return (
-      <button className="button is-primary is-pulled-right" disabled={quantity ? '' : 'disabled'} onClick={handleSubmit}>
-        Provide quote
-      </button>
+      <React.Fragment>
+        <h6 className="subtitle is-6">______________________________</h6>
+        <button className="button is-info is-outlined is-fullwidth" disabled={quantity ? '' : 'disabled'} onClick={handleSubmit}>
+          Provide quote
+        </button>
+      </React.Fragment>
     )
   }
 
