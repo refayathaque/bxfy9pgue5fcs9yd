@@ -29,7 +29,7 @@ const App = () => {
           <div className="column">
             <Input />
           </div>
-          <div className="column">
+          <div className="column is-one-quarter">
             <Output />
           </div>
         </div>
