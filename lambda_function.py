@@ -1,8 +1,8 @@
 import json, os
 
-event_1 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+event_1 = {'quantity': '11', 'totalDiscountPercentage': '2', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '3', 'sqFt': '4', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 
-event_2 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+event_2 = {'quantity': '55', 'totalDiscountPercentage': '', 'totalDiscountValue': '67', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '8', 'sqFt': '99', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 
 event_3 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 
@@ -44,10 +44,13 @@ def standard_pricing(event, flat_fee):
         if event['totalDiscountPercentage']:
             final_price_after_discounts = final_price_before_discounts * (1 - (int(event['totalDiscountPercentage'])/100))
         if event['totalDiscountValue']:
-            final_price_after_discounts = ((final_price_before_discounts*12) - int(event['totalDiscountValue']))
+            final_price_after_discounts = ((final_price_before_discounts) - int(event['totalDiscountValue']))
     else:
         final_price_after_discounts = final_price_before_discounts
+    if event['conditionalDiscountTrigger']:
+        if final_price_after_discounts >= event['conditionalDiscountTrigger']
 
-    return final_price_after_discounts
+    return round(final_price_after_discounts, 2)
+    # https://tutorialdeep.com/knowhow/round-float-to-2-decimal-places-python/
 
-lambda_handler(event, context)
+lambda_handler(event_2, context)

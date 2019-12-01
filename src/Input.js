@@ -72,6 +72,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   }
 
   const handleTotalDiscountPercentage = value => {
+    handleConditionalDiscountTrigger(conditionalDiscountTrigger)
     setTotalDiscountPercentage(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
       // Regex ^ ensures value is a valid number less than 100
@@ -82,6 +83,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   }
 
   const handleTotalDiscountValue = value => {
+    handleConditionalDiscountTrigger(conditionalDiscountTrigger)
     setTotalDiscountValue(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
       // Regex ^ ensures value is a valid number less than 1000
@@ -93,7 +95,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   const handleConditionalDiscountTrigger = value => {
     setConditionalDiscountTrigger(value)
-    if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
+    if ((/^[1-9]([0-9]{0,2}$)/g.test(value) && ((Boolean(totalDiscountValue) && totalDiscountValueValid) || (Boolean(totalDiscountPercentage) && totalDiscountPercentageValid))) || !value) {
       // Regex ^ ensures value is a valid number less than 1000
       setConditionalDiscountTriggerValid(true);
     } else {
@@ -317,7 +319,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           </div>
 
           <fieldset disabled={totalDiscountValue && totalDiscountValueValid}>
-            <div className="is-italic">Discount on total storage fee</div>
+            <div className="is-italic">Discount on monthly storage fee</div>
             <div className="field">
               <label className="label">%</label>
               <div className="control">
@@ -328,7 +330,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           </fieldset>
 
           <fieldset style={{ paddingTop: '0.75rem' }} disabled={totalDiscountPercentage && totalDiscountPercentageValid}>
-            <div className="is-italic">Discount on total storage fee (flat)</div>
+            <div className="is-italic">Discount on monthly storage fee (flat)</div>
             <div className="field">
               <label className="label">$</label>
               <div className="control">
@@ -338,13 +340,13 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             </div>
           </fieldset>
 
-          <div style={{ paddingTop: '0.75rem' }} className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee hits this amount a % or $ (flat) discount (specified above) is applied</div>
+          <div style={{ paddingTop: '0.75rem' }} className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee reaches the amount, a % or $ (flat) discount (specified above) is applied</div>
           <div className="field">
             <label className="label">$</label>
             <div className="control">
               <input className={conditionalDiscountTriggerValid ? 'input' : 'input is-danger'} type="text" name="" value={conditionalDiscountTrigger} onChange={event => handleConditionalDiscountTrigger(event.target.value)} />
             </div>
-            {conditionalDiscountTriggerValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
+            {conditionalDiscountTriggerValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000, and have a % or $ (flat) discount (specified above)</p>}
           </div>
         </fieldset>
       </React.Fragment>
