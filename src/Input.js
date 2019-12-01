@@ -191,8 +191,15 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     }
   }
 
-  const [conditionalDiscountTrigger, setConditionalDiscountTrigger] = useState('');
-  const [conditionalDiscountTriggerValid, setConditionalDiscountTriggerValid] = useState(true);
+  const handleConditionalDiscountTrigger = value => {
+    setConditionalDiscountTrigger(value)
+    if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
+      // Regex ^ ensures value is a valid number less than 1000
+      setConditionalDiscountTriggerValid(true);
+    } else {
+      setConditionalDiscountTriggerValid(false);
+    }
+  }
 
   const handleSubmit = () => {
     postCustomPricing(quantity, extraChargeReason, totalDiscountPercentage, totalDiscountValue, extraChargePerSqFt, sqFt)
@@ -201,23 +208,23 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const renderExtraChargeSqFt = () => {
     return (
       <React.Fragment>
-        <div className="is-italic">* You can only apply these extra charges under standard and staggered pricing</div>
+        <div className="is-italic">* You can only apply these <u>extra charges</u> with <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
         <div className="field is-grouped">
           <div className="control is-expanded">
-            <label className="label">Per square foot charge</label>
+            <label className="label">$ - Per sq. ft. item(s) occupy</label>
             <input className={extraChargePerSqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={extraChargePerSqFt} onChange={event => handleExtraChargePerSqFt(event.target.value)} />
             {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $10</p>}
           </div>
 
           <div className="control is-expanded">
-            <label className="label">Square footage</label>
+            <label className="label">Sq. ft.</label>
             <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
             {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
           </div>
 
           <div className="control is-expanded">
-            <label className="label">Reason for extra charge</label>
-            <input className={extraChargeReasonValid ? 'input' : 'input is-danger'} type="text" name="" value={extraChargeReason} onChange={event => handleExtraChargeReason(event.target.value)} />
+            <label className="label">Reason</label>
+            <input className={extraChargeReasonValid ? 'input' : 'input is-danger'} type="text" placeholder="e.g., large or heavy item" name="" value={extraChargeReason} onChange={event => handleExtraChargeReason(event.target.value)} />
             {extraChargeReasonValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid set of words and numbers with no symbols</p>}
           </div>
         </div>
@@ -302,7 +309,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             {totalDiscountPercentageValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
           </div>
 
-          <div className="is-italic">Discount on total storage fee (Flat)</div>
+          <div className="is-italic">Discount on total storage fee (flat)</div>
           <div className="field">
             <label className="label">$</label>
             <div className="control">
@@ -311,7 +318,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
           </div>
 
-          <div className="is-italic">Set a conditional discount trigger, at which point a % or $ (flat discount) will be applied to the monthly storage fee</div>
+          <div className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee hits this amount a % or $ (flat) discount (specified above) is applied</div>
           <div className="field">
             <label className="label">$</label>
             <div className="control">
