@@ -387,8 +387,9 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     return (
       <React.Fragment>
         <h6 className="subtitle is-6">__________________________________</h6>
-        <button className="button is-info is-outlined is-fullwidth" disabled={(quantity && quantityValid) || (stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid) ? '' : 'disabled'} onClick={handleSubmit}>
-          Provide quote
+        <button className={`button is-info is-outlined is-fullwidth ${postCustomPricingReducer.status === "waiting" ? "is-loading" : ""}`} disabled={(quantity && quantityValid) || (stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid) ? '' : 'disabled'} onClick={handleSubmit}>
+          {/* https://stackoverflow.com/a/51183104/8379751 */}
+          Provide quotes
         </button>
       </React.Fragment>
     )
