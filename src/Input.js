@@ -40,6 +40,27 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const [valueBasedPercentageDiscount, setValueBasedPercentageDiscount] = useState('')
   const [valueBasedPercentageDiscountValid, setValueBasedPercentageDiscountValid] = useState(true);
 
+  const handleSubmit = () => {
+    postCustomPricing(
+      quantity,
+      totalDiscountPercentage,
+      totalDiscountValue,
+      conditionalDiscountTrigger,
+      extraChargePerSqFt,
+      sqFt,
+      extraChargeReason,
+      stgPrcFirstQuantity,
+      stgPrcFirstPercentageDiscount,
+      stgPrcSecondQuantity,
+      stgPrcSecondPercentageDiscount,
+      stgPrcRemainingQuantity,
+      stgPrcRemainingPercentageDiscount,
+      valueBasedItemsTotal,
+      valueBasedPercentageAsFee,
+      valueBasedPercentageDiscount
+    )
+  }
+
   const handleQuantity = value => {
     setQuantity(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value)) {
@@ -104,7 +125,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     setExtraChargeReason(value)
     if (/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g.test(value)) {
       // https://www.regextester.com/93960
-      // Regex ^ ensures value is a valid set of words and numbers with no symbols
+      // Regex ^ ensures value is a valid word, or set of words, with numbers and no symbols
       setExtraChargeReasonValid(true);
     } else {
       setExtraChargeReasonValid(false);
@@ -201,10 +222,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     }
   }
 
-  const handleSubmit = () => {
-    postCustomPricing(quantity, extraChargeReason, totalDiscountPercentage, totalDiscountValue, extraChargePerSqFt, sqFt)
-  }
-
   const renderExtraChargeSqFt = () => {
     return (
       <React.Fragment>
@@ -224,8 +241,8 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
           <div className="control is-expanded">
             <label className="label">Reason</label>
-            <input className={extraChargeReasonValid ? 'input' : 'input is-danger'} type="text" placeholder="e.g., large or heavy item" name="" value={extraChargeReason} onChange={event => handleExtraChargeReason(event.target.value)} />
-            {extraChargeReasonValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid set of words and numbers with no symbols</p>}
+            <input className={extraChargeReasonValid ? 'input' : 'input is-danger'} type="text" placeholder="e.g., 'Large' or 'Heavy item'" name="" value={extraChargeReason} onChange={event => handleExtraChargeReason(event.target.value)} />
+            {extraChargeReasonValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid word, or set of words, with numbers and no symbols</p>}
           </div>
         </div>
       </React.Fragment>
@@ -300,23 +317,27 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             {quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
           </div>
 
-          <div className="is-italic">Discount on total storage fee</div>
-          <div className="field">
-            <label className="label">%</label>
-            <div className="control">
-              <input className={totalDiscountPercentageValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountPercentage} onChange={event => handleTotalDiscountPercentage(event.target.value)} />
+          <fieldset disabled={totalDiscountValue && totalDiscountValueValid}>
+            <div className="is-italic">Discount on total storage fee</div>
+            <div className="field">
+              <label className="label">%</label>
+              <div className="control">
+                <input className={totalDiscountPercentageValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountPercentage} onChange={event => handleTotalDiscountPercentage(event.target.value)} />
+              </div>
+              {totalDiscountPercentageValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
             </div>
-            {totalDiscountPercentageValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
-          </div>
+          </fieldset>
 
-          <div className="is-italic">Discount on total storage fee (flat)</div>
-          <div className="field">
-            <label className="label">$</label>
-            <div className="control">
-              <input className={totalDiscountValueValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountValue} onChange={event => handleTotalDiscountValue(event.target.value)} />
+          <fieldset disabled={totalDiscountPercentage && totalDiscountPercentageValid}>
+            <div className="is-italic">Discount on total storage fee (flat)</div>
+            <div className="field">
+              <label className="label">$</label>
+              <div className="control">
+                <input className={totalDiscountValueValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountValue} onChange={event => handleTotalDiscountValue(event.target.value)} />
+              </div>
+              {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
             </div>
-            {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
-          </div>
+          </fieldset>
 
           <div className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee hits this amount a % or $ (flat) discount (specified above) is applied</div>
           <div className="field">

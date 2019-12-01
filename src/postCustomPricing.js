@@ -1,7 +1,24 @@
 import { POST_CUSTOM_PRICING_REQUESTED, POST_CUSTOM_PRICING_RECEIVED, POST_CUSTOM_PRICING_FAILED } from './types';
 import axios from 'axios';
 
-const postCustomPricing = (quantity, largeSizedItemQuantity = 0, totalDiscountPercentage = 0, totalDiscountValue = 0, extraChargePerSqFt = 0, sqFt) => {
+const postCustomPricing = (
+  quantity,
+  totalDiscountPercentage,
+  totalDiscountValue,
+  conditionalDiscountTrigger,
+  extraChargePerSqFt,
+  sqFt,
+  extraChargeReason,
+  stgPrcFirstQuantity,
+  stgPrcFirstPercentageDiscount,
+  stgPrcSecondQuantity,
+  stgPrcSecondPercentageDiscount,
+  stgPrcRemainingQuantity,
+  stgPrcRemainingPercentageDiscount,
+  valueBasedItemsTotal,
+  valueBasedPercentageAsFee,
+  valueBasedPercentageDiscount
+) => {
   return async (dispatch) => {
 
     dispatch({
@@ -14,11 +31,21 @@ const postCustomPricing = (quantity, largeSizedItemQuantity = 0, totalDiscountPe
 
     const data = {
       quantity: quantity,
-      largeSizedItemQuantity: largeSizedItemQuantity,
       totalDiscountPercentage: totalDiscountPercentage,
       totalDiscountValue: totalDiscountValue,
+      conditionalDiscountTrigger: conditionalDiscountTrigger,
       extraChargePerSqFt: extraChargePerSqFt,
-      sqFt: sqFt
+      sqFt: sqFt,
+      extraChargeReason: extraChargeReason,
+      stgPrcFirstQuantity: stgPrcFirstQuantity,
+      stgPrcFirstPercentageDiscount: stgPrcFirstPercentageDiscount,
+      stgPrcSecondQuantity: stgPrcSecondQuantity,
+      stgPrcSecondPercentageDiscount: stgPrcSecondPercentageDiscount,
+      stgPrcRemainingQuantity: stgPrcRemainingQuantity,
+      stgPrcRemainingPercentageDiscount: stgPrcRemainingPercentageDiscount,
+      valueBasedItemsTotal: valueBasedItemsTotal,
+      valueBasedPercentageAsFee: valueBasedPercentageAsFee,
+      valueBasedPercentageDiscount: valueBasedPercentageDiscount
     }
 
     console.log(data)
