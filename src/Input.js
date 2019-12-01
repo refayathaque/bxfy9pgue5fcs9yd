@@ -225,7 +225,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const renderExtraChargeSqFt = () => {
     return (
       <React.Fragment>
-        <div className="is-italic">* You can only apply these <u>extra charges</u> to <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
+        <div className="is-italic">* You may only apply these <u>extra charges</u> to <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
         <div className="field is-grouped">
           <div className="control is-expanded">
             <label className="label">$ - Per sq. ft. item(s) occupy</label>
@@ -397,7 +397,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   return (
     <React.Fragment>
       <div>Submit the form below to receive both monthly and yearly quotes for your prospective customer:</div>
-      <h6 className="subtitle is-6 is-italic">* You can only use <u>either</u> standard, staggered or value-based pricing structures, you cannot combine them</h6>
+      <h6 className="subtitle is-6 is-italic">* You may <span className="has-text-weight-bold">only</span> use <u>either</u> standard, staggered or value-based pricing structures</h6>
       <div className="columns">
         <div className="column is-5">
           {renderStandardPricing()}
