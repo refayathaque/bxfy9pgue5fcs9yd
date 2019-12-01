@@ -50,17 +50,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     }
   }
 
-  const handleExtraChargeReason= value => {
-    setExtraChargeReason(value)
-    if (/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g.test(value)) {
-      // https://www.regextester.com/93960
-      // Regex ^ ensures value is a valid set of words and numbers with no symbols
-      setExtraChargeReasonValid(true);
-    } else {
-      setExtraChargeReasonValid(false);
-    }
-  }
-
   const handleTotalDiscountPercentage = value => {
     setTotalDiscountPercentage(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
@@ -81,6 +70,16 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     }
   }
 
+  const handleConditionalDiscountTrigger = value => {
+    setConditionalDiscountTrigger(value)
+    if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
+      // Regex ^ ensures value is a valid number less than 1000
+      setConditionalDiscountTriggerValid(true);
+    } else {
+      setConditionalDiscountTriggerValid(false);
+    }
+  }
+
   const handleExtraChargePerSqFt = value => {
     setExtraChargePerSqFt(value)
     if (/^[1-9]([0-9]{0,0}$)/g.test(value) || !value) {
@@ -98,6 +97,17 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
       setSqFtValid(true);
     } else {
       setSqFtValid(false);
+    }
+  }
+
+  const handleExtraChargeReason= value => {
+    setExtraChargeReason(value)
+    if (/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g.test(value)) {
+      // https://www.regextester.com/93960
+      // Regex ^ ensures value is a valid set of words and numbers with no symbols
+      setExtraChargeReasonValid(true);
+    } else {
+      setExtraChargeReasonValid(false);
     }
   }
 
@@ -163,11 +173,11 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   const handleValueBasedItemsTotal = value => {
     setValueBasedItemsTotal(value)
-    if (/^[1-9]([0-9]{0,6}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 10000000 (1 million)
-      setStgPrcFirstQuantityValid(true);
+    if (/^[1-9]([0-9]{0,5}$)/g.test(value) || !value) {
+      // Regex ^ ensures value is a valid number less than 1000000 (1 million)
+      setValueBasedItemsTotalValid(true);
     } else {
-      setStgPrcFirstQuantityValid(false);
+      setValueBasedItemsTotalValid(false);
     }
   }
 
@@ -191,16 +201,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     }
   }
 
-  const handleConditionalDiscountTrigger = value => {
-    setConditionalDiscountTrigger(value)
-    if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000
-      setConditionalDiscountTriggerValid(true);
-    } else {
-      setConditionalDiscountTriggerValid(false);
-    }
-  }
-
   const handleSubmit = () => {
     postCustomPricing(quantity, extraChargeReason, totalDiscountPercentage, totalDiscountValue, extraChargePerSqFt, sqFt)
   }
@@ -208,7 +208,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const renderExtraChargeSqFt = () => {
     return (
       <React.Fragment>
-        <div className="is-italic">* You can only apply these <u>extra charges</u> with <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
+        <div className="is-italic">* You can only apply these <u>extra charges</u> to <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
         <div className="field is-grouped">
           <div className="control is-expanded">
             <label className="label">$ - Per sq. ft. item(s) occupy</label>
@@ -238,7 +238,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
       <React.Fragment>
         <h4 className="subtitle is-4">Staggered Pricing</h4>
 
-        <fieldset disabled={quantity && quantityValid}>
+        <fieldset disabled={(quantity && quantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid)}>
           <div className="is-italic">First set of items</div>
           <div className="field is-grouped">
             <div className="control is-expanded">
@@ -247,7 +247,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
               {stgPrcFirstQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
             </div>
             <div className="control is-expanded">
-              <label className="label">% Discount</label>
+              <label className="label">% discount</label>
               <input className={stgPrcFirstPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcFirstPercentageDiscount} onChange={event => handleStgPrcFirstPercentageDiscount(event.target.value)} />
               {stgPrcFirstPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
             </div>
@@ -261,7 +261,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
               {stgPrcSecondQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than the first set of items</p>}
             </div>
             <div className="control is-expanded">
-              <label className="label">% Discount</label>
+              <label className="label">% discount</label>
               <input className={stgPrcSecondPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcSecondPercentageDiscount} onChange={event => handleStgPrcSecondPercentageDiscount(event.target.value)} />
               {stgPrcSecondPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
             </div>
@@ -275,7 +275,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
               {stgPrcRemainingQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than the sum of the first and second set of items</p>}
             </div>
             <div className="control is-expanded">
-              <label className="label">% Discount</label>
+              <label className="label">% discount</label>
               <input className={stgPrcRemainingPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcRemainingPercentageDiscount} onChange={event => handleStgPrcRemainingPercentageDiscount(event.target.value)} />
               {stgPrcRemainingPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
             </div>
@@ -290,7 +290,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
       <React.Fragment>
         <h4 className="subtitle is-4">Standard Pricing</h4>
 
-        <fieldset disabled={stgPrcFirstQuantity && stgPrcFirstQuantityValid}>
+        <fieldset disabled={(stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid)}>
           <div className="is-italic">Total number of items stored</div>
           <div className="field">
             <label className="label">#</label>
@@ -337,25 +337,25 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
         <h6 className="subtitle is-6">__________________________________</h6>
         <h4 className="subtitle is-4">Value-Based Pricing</h4>
 
-        <fieldset>
+        <fieldset disabled={(stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (quantity && quantityValid) || (extraChargePerSqFt && extraChargePerSqFtValid)}>
           <div className="field is-grouped">
             <div className="control is-expanded">
               <label className="label">Total value of item(s)</label>
               <input className={valueBasedItemsTotalValid ? 'input' : 'input is-danger'} type="text" name="" value={valueBasedItemsTotal} onChange={event => handleValueBasedItemsTotal(event.target.value)} />
+              {valueBasedItemsTotalValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000,000</p>}
             </div>
-            {valueBasedItemsTotalValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
 
             <div className="control is-expanded">
               <label className="label">% of item(s) value as storage fee</label>
               <input className={valueBasedPercentageAsFeeValid ? 'input' : 'input is-danger'} type="text" name="" value={valueBasedPercentageAsFee} onChange={event => handleValueBasedPercentageAsFee(event.target.value)} />
+              {valueBasedPercentageAsFeeValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
             </div>
-            {valueBasedPercentageAsFeeValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
 
             <div className="control is-expanded">
-              <label className="label">% discount on fee</label>
+              <label className="label">% discount</label>
               <input className={valueBasedPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={valueBasedPercentageDiscount} onChange={event => handleValueBasedPercentageDiscount(event.target.value)} />
+              {valueBasedPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
             </div>
-            {valueBasedPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
           </div>
         </fieldset>
       </React.Fragment>
@@ -366,7 +366,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     return (
       <React.Fragment>
         <h6 className="subtitle is-6">__________________________________</h6>
-        <button className="button is-info is-outlined is-fullwidth" disabled={quantity ? '' : 'disabled'} onClick={handleSubmit}>
+        <button className="button is-info is-outlined is-fullwidth" disabled={(quantity && quantityValid) || (stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid) ? '' : 'disabled'} onClick={handleSubmit}>
           Provide quote
         </button>
       </React.Fragment>
@@ -375,7 +375,8 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   return (
     <React.Fragment>
-      <h6 className="subtitle is-6">Submit the form below to receive both monthly and yearly quotes for your prospective customer:</h6>
+      <div>Submit the form below to receive both monthly and yearly quotes for your prospective customer:</div>
+      <h6 className="subtitle is-6 is-italic">* You can only use <u>either</u> standard, staggered or value-based pricing structures, you cannot combine them</h6>
       <div className="columns">
         <div className="column is-5">
           {renderStandardPricing()}
