@@ -250,7 +250,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   }
 
   const renderStaggeredPricing = () => {
-    console.log(quantity)
     return (
       <React.Fragment>
         <h4 className="subtitle is-4">Staggered Pricing</h4>
@@ -328,7 +327,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             </div>
           </fieldset>
 
-          <fieldset disabled={totalDiscountPercentage && totalDiscountPercentageValid}>
+          <fieldset style={{ paddingTop: '0.75rem' }} disabled={totalDiscountPercentage && totalDiscountPercentageValid}>
             <div className="is-italic">Discount on total storage fee (flat)</div>
             <div className="field">
               <label className="label">$</label>
@@ -339,7 +338,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             </div>
           </fieldset>
 
-          <div className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee hits this amount a % or $ (flat) discount (specified above) is applied</div>
+          <div style={{ paddingTop: '0.75rem' }} className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee hits this amount a % or $ (flat) discount (specified above) is applied</div>
           <div className="field">
             <label className="label">$</label>
             <div className="control">
@@ -415,7 +414,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 }
 
 const mapStateToProps = ({ postCustomPricingReducer }) => {
-  console.log(postCustomPricingReducer)
   return {
     postCustomPricingReducer
   }
