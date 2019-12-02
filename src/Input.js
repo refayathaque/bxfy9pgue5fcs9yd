@@ -92,7 +92,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   const handleConditionalDiscountTrigger = value => {
     setConditionalDiscountTrigger(value)
-    if ((/^[1-9]([0-9]{0,2}$)/g.test(value) && ((Boolean(totalDiscountValue) && totalDiscountValueValid) || (Boolean(totalDiscountPercentage) && totalDiscountPercentageValid))) || !value) {
+    if ((/^[1-9]([0-9]{0,2}$)/g.test(value) && (totalDiscountValueValid || totalDiscountPercentageValid)) || !value) {
       // Regex ^ ensures value is a valid integer less than 1000
       setConditionalDiscountTriggerValid(true);
     } else {
