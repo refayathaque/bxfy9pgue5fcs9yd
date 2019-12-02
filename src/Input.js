@@ -271,33 +271,37 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             </div>
           </div>
 
-          <div className="is-italic">Second set of items</div>
-          <div className="field is-grouped">
-            <div className="control is-expanded">
-              <label className="label">#</label>
-              <input className={stgPrcSecondQuantityValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcSecondQuantity} onChange={event => handleStgPrcSecondQuantity(event.target.value)} />
-              {stgPrcSecondQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than the first set of items</p>}
+          <fieldset disabled={!stgPrcFirstQuantity || !stgPrcFirstQuantityValid}>
+            <div className="is-italic">Second set of items</div>
+            <div className="field is-grouped">
+              <div className="control is-expanded">
+                <label className="label">#</label>
+                <input className={stgPrcSecondQuantityValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcSecondQuantity} onChange={event => handleStgPrcSecondQuantity(event.target.value)} />
+                {stgPrcSecondQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number, and a value, when added to the first and other sets, is less than 1,000</p>}
+              </div>
+              <div className="control is-expanded">
+                <label className="label">% discount</label>
+                <input className={stgPrcSecondPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcSecondPercentageDiscount} onChange={event => handleStgPrcSecondPercentageDiscount(event.target.value)} />
+                {stgPrcSecondPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+              </div>
             </div>
-            <div className="control is-expanded">
-              <label className="label">% discount</label>
-              <input className={stgPrcSecondPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcSecondPercentageDiscount} onChange={event => handleStgPrcSecondPercentageDiscount(event.target.value)} />
-              {stgPrcSecondPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
-            </div>
-          </div>
+          </fieldset>
 
-          <div className="is-italic">Remaining items</div>
-          <div className="field is-grouped">
-            <div className="control is-expanded">
-              <label className="label">#</label>
-              <input className={stgPrcRemainingQuantityValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcRemainingQuantity} onChange={event => handleStgPrcRemainingQuantity(event.target.value)} />
-              {stgPrcRemainingQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than the sum of the first and second set of items</p>}
+          <fieldset disabled={(stgPrcFirstQuantity || stgPrcFirstQuantityValid) && (!stgPrcSecondQuantity || !stgPrcSecondQuantityValid)}>
+            <div className="is-italic">Remaining items</div>
+            <div className="field is-grouped">
+              <div className="control is-expanded">
+                <label className="label">#</label>
+                <input className={stgPrcRemainingQuantityValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcRemainingQuantity} onChange={event => handleStgPrcRemainingQuantity(event.target.value)} />
+                {stgPrcRemainingQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number, and a value, when added to the first and second sets, is less than 1,000</p>}
+              </div>
+              <div className="control is-expanded">
+                <label className="label">% discount</label>
+                <input className={stgPrcRemainingPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcRemainingPercentageDiscount} onChange={event => handleStgPrcRemainingPercentageDiscount(event.target.value)} />
+                {stgPrcRemainingPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+              </div>
             </div>
-            <div className="control is-expanded">
-              <label className="label">% discount</label>
-              <input className={stgPrcRemainingPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcRemainingPercentageDiscount} onChange={event => handleStgPrcRemainingPercentageDiscount(event.target.value)} />
-              {stgPrcRemainingPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
-            </div>
-          </div>
+          </fieldset>
         </fieldset>
       </React.Fragment>
     )
@@ -404,7 +408,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
         <div className="column is-5">
           {renderStandardPricing()}
         </div>
-        <div className="column is-7">
+        <div className="column is-7" style={{ borderLeft: '1px solid #4A4A4A' }}>
           {renderStaggeredPricing()}
         </div>
       </div>
