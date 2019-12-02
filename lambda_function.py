@@ -138,8 +138,8 @@ def lambda_handler(event, context):
         return {
             'statusCode': 200,
             'structure': json.dumps("Value-Based Pricing"),
-            # 'quote_monthly': value_based_pricing(event),
-            # 'quote_yearly': value_based_pricing(event) * 12
+            'quote_monthly': value_based_pricing(event),
+            'quote_yearly': value_based_pricing(event) * 12
         }
 
 lambda_handler(value_based_pricing_event_2, context)
