@@ -17,8 +17,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const [extraChargePerSqFtValid, setExtraChargePerSqFtValid] = useState(true);
   const [sqFt, setSqFt] = useState('');
   const [sqFtValid, setSqFtValid] = useState(true);
-  const [extraChargeReason, setExtraChargeReason] = useState('');
-  const [extraChargeReasonValid, setExtraChargeReasonValid] = useState(true);
 
   const [stgPrcFirstQuantity, setStgPrcFirstQuantity] = useState('')
   const [stgPrcFirstQuantityValid, setStgPrcFirstQuantityValid] = useState(true);
@@ -48,7 +46,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
       conditionalDiscountTrigger,
       extraChargePerSqFt,
       sqFt,
-      extraChargeReason,
       stgPrcFirstQuantity,
       stgPrcFirstPercentageDiscount,
       stgPrcSecondQuantity,
@@ -120,17 +117,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
       setSqFtValid(true);
     } else {
       setSqFtValid(false);
-    }
-  }
-
-  const handleExtraChargeReason= value => {
-    setExtraChargeReason(value)
-    if (/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g.test(value)) {
-      // https://www.regextester.com/93960
-      // Regex ^ ensures value is a valid word, or set of words, with numbers and no symbols
-      setExtraChargeReasonValid(true);
-    } else {
-      setExtraChargeReasonValid(false);
     }
   }
 
@@ -228,23 +214,18 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     return (
       <React.Fragment>
         <div className="is-italic">* You may only apply these <u>extra charges</u> to <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
+        
         <div className="field is-grouped">
           <div className="control is-expanded">
-            <label className="label">$ - Per sq. ft. item(s) occupy</label>
-            <input className={extraChargePerSqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={extraChargePerSqFt} onChange={event => handleExtraChargePerSqFt(event.target.value)} />
-            {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $10</p>}
-          </div>
-
-          <div className="control is-expanded">
-            <label className="label">Sq. ft.</label>
+            <label className="label">Sq. Ft. - Area occupied by large and/or fragile item(s)</label>
             <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
             {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
           </div>
 
           <div className="control is-expanded">
-            <label className="label">Reason</label>
-            <input className={extraChargeReasonValid ? 'input' : 'input is-danger'} type="text" placeholder="e.g., 'Large' or 'Heavy item'" name="" value={extraChargeReason} onChange={event => handleExtraChargeReason(event.target.value)} />
-            {extraChargeReasonValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid word, or set of words, with numbers and no symbols</p>}
+            <label className="label">$ - Cost per sq. ft.</label>
+            <input className={extraChargePerSqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={extraChargePerSqFt} onChange={event => handleExtraChargePerSqFt(event.target.value)} />
+            {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $10</p>}
           </div>
         </div>
       </React.Fragment>
@@ -287,7 +268,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             </div>
           </fieldset>
 
-          <fieldset disabled={(stgPrcFirstQuantity || stgPrcFirstQuantityValid) && (!stgPrcSecondQuantity || !stgPrcSecondQuantityValid)}>
+          <fieldset style={{ paddingTop: '0.75rem' }} disabled={(stgPrcFirstQuantity || stgPrcFirstQuantityValid) && (!stgPrcSecondQuantity || !stgPrcSecondQuantityValid)}>
             <div className="is-italic">Remaining items</div>
             <div className="field is-grouped">
               <div className="control is-expanded">

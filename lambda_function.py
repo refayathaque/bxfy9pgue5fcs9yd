@@ -1,33 +1,34 @@
 import json, os
 
-standard_pricing_event_1 = {'quantity': '11', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '3.23', 'sqFt': '4', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+standard_pricing_event_1 = {'quantity': '11', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '3.23', 'sqFt': '4', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-standard_pricing_event_2 = {'quantity': '55', 'totalDiscountPercentage': '12.34', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '8.9', 'sqFt': '94.34', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+standard_pricing_event_2 = {'quantity': '55', 'totalDiscountPercentage': '12.34', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '8.9', 'sqFt': '94.34', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-standard_pricing_event_3 = {'quantity': '17', 'totalDiscountPercentage': '12.7', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '230', 'extraChargePerSqFt': '9', 'sqFt': '25', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+standard_pricing_event_3 = {'quantity': '17', 'totalDiscountPercentage': '12.7', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '230', 'extraChargePerSqFt': '9', 'sqFt': '25', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-standard_pricing_event_4 = {'quantity': '121', 'totalDiscountPercentage': '', 'totalDiscountValue': '97', 'conditionalDiscountTrigger': '300', 'extraChargePerSqFt': '4.9', 'sqFt': '111', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+standard_pricing_event_4 = {'quantity': '121', 'totalDiscountPercentage': '', 'totalDiscountValue': '97', 'conditionalDiscountTrigger': '300', 'extraChargePerSqFt': '4.9', 'sqFt': '111', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-standard_pricing_event_5 = {'quantity': '11', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+standard_pricing_event_5 = {'quantity': '11', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-standard_pricing_event_6 = {'quantity': '11', 'totalDiscountPercentage': '2.3', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+standard_pricing_event_6 = {'quantity': '11', 'totalDiscountPercentage': '2.3', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-staggered_pricing_event_1 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '5', 'stgPrcSecondQuantity': '45', 'stgPrcSecondPercentageDiscount': '2', 'stgPrcRemainingQuantity': '46', 'stgPrcRemainingPercentageDiscount': '17', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+staggered_pricing_event_1 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '5', 'stgPrcSecondQuantity': '45', 'stgPrcSecondPercentageDiscount': '2', 'stgPrcRemainingQuantity': '46', 'stgPrcRemainingPercentageDiscount': '17', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-staggered_pricing_event_1 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '5', 'stgPrcSecondQuantity': '45', 'stgPrcSecondPercentageDiscount': '2', 'stgPrcRemainingQuantity': '46', 'stgPrcRemainingPercentageDiscount': '17', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+staggered_pricing_event_1 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '5', 'stgPrcSecondQuantity': '45', 'stgPrcSecondPercentageDiscount': '2', 'stgPrcRemainingQuantity': '46', 'stgPrcRemainingPercentageDiscount': '17', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-staggered_pricing_event_2 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '45', 'stgPrcSecondPercentageDiscount': '6', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+staggered_pricing_event_2 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '45', 'stgPrcSecondPercentageDiscount': '6', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
-staggered_pricing_event_3 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'extraChargeReason': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '45', 'stgPrcRemainingPercentageDiscount': '30', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+staggered_pricing_event_3 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '12', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '12', 'stgPrcRemainingPercentageDiscount': '12', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+# works
 
 context = 'test'
 
@@ -46,9 +47,9 @@ def staggered_pricing(event, flat_fee):
             if event['stgPrcRemainingPercentageDiscount']:
                 fee_remaining = fee_remaining * (1 - (float(event['stgPrcRemainingPercentageDiscount'])/100))
                 print('Remaining Set After Discount:', fee_remaining)
-            return round(fee_first + fee_second + fee_remaining)
-        return round(fee_first + fee_second)
-    return round(fee_first)
+            return round(fee_first + fee_second + fee_remaining, 2)
+        return round(fee_first + fee_second, 2)
+    return round(fee_first, 2)
 
 def lambda_handler(event, context):
     # flat_fee = float(os.environ['flat_fee'])
@@ -99,4 +100,4 @@ def standard_pricing(event, flat_fee):
     return round(fee, 2)
     # https://tutorialdeep.com/knowhow/round-float-to-2-decimal-places-python/
 
-lambda_handler(staggered_pricing_event_3, context)
+lambda_handler(staggered_pricing_event_2, context)
