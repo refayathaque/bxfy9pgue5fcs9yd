@@ -6,14 +6,14 @@ const Output = ({postCustomPricingReducer}) => {
   const renderResponse = () => {
     if (postCustomPricingReducer.status === "") {
       return (
-        <div class="tile">
-          <article class="tile is-child notification is-info">
-            <p class="title">Quote</p>
-            <p class="subtitle">Pricing:</p>
-            <div class="content">
+        <div className="tile">
+          <article className="tile is-child notification is-info">
+            <p className="title">Quote</p>
+            <p className="subtitle">Pricing:</p>
+            <div className="content">
               Monthly:
             </div>
-            <div class="content">
+            <div className="content">
               Yearly:
             </div>
           </article>
@@ -21,14 +21,14 @@ const Output = ({postCustomPricingReducer}) => {
       )
     } else if (postCustomPricingReducer.status === "waiting") {
       return (
-        <div class="tile">
-          <article class="tile is-child notification is-info">
-            <p class="title">Quote</p>
-            <p class="subtitle">Pricing:</p>
-            <div class="content">
+        <div className="tile">
+          <article className="tile is-child notification is-info">
+            <p className="title">Quote</p>
+            <p className="subtitle">Pricing:</p>
+            <div className="content">
               Monthly:
             </div>
-            <div class="content">
+            <div className="content">
               Yearly:
             </div>
           </article>
@@ -36,15 +36,15 @@ const Output = ({postCustomPricingReducer}) => {
       )
     } else if (postCustomPricingReducer.status === "received") {
       return (
-        <div class="tile">
-          <article class="tile is-child notification is-info">
-            <p class="title">Quote</p>
-            <p class="subtitle">Pricing:</p>
-            <div class="content">
-              Monthly: {postCustomPricingReducer.response.data.body}
+        <div className="tile">
+          <article className="tile is-child notification is-info">
+            <p className="title">Quote</p>
+            <p className="subtitle">{postCustomPricingReducer.response.data.structure}</p>
+            <div className="content">
+              Monthly: C$ {postCustomPricingReducer.response.data.quote_monthly}
             </div>
-            <div class="content">
-              Yearly:
+            <div className="content">
+              Yearly: C$ {postCustomPricingReducer.response.data.quote_yearly}
             </div>
           </article>
         </div>

@@ -61,7 +61,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleQuantity = value => {
     setQuantity(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value)) {
-      // Regex ^ ensures value is a valid number less than 1000
+      // Regex ^ ensures value is a valid integer less than 1000
       setQuantityValid(true);
     } else {
       setQuantityValid(false);
@@ -72,7 +72,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     handleConditionalDiscountTrigger(conditionalDiscountTrigger)
     setTotalDiscountPercentage(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 100
+      // Regex ^ ensures value is a valid integer less than 100
       setTotalDiscountPercentageValid(true);
     } else {
       setTotalDiscountPercentageValid(false);
@@ -83,7 +83,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     handleConditionalDiscountTrigger(conditionalDiscountTrigger)
     setTotalDiscountValue(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000
+      // Regex ^ ensures value is a valid integer less than 1000
       setTotalDiscountValueValid(true);
     } else {
       setTotalDiscountValueValid(false);
@@ -93,7 +93,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleConditionalDiscountTrigger = value => {
     setConditionalDiscountTrigger(value)
     if ((/^[1-9]([0-9]{0,2}$)/g.test(value) && ((Boolean(totalDiscountValue) && totalDiscountValueValid) || (Boolean(totalDiscountPercentage) && totalDiscountPercentageValid))) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000
+      // Regex ^ ensures value is a valid integer less than 1000
       setConditionalDiscountTriggerValid(true);
     } else {
       setConditionalDiscountTriggerValid(false);
@@ -103,7 +103,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleExtraChargePerSqFt = value => {
     setExtraChargePerSqFt(value)
     if (/^[1-9]([0-9]{0,0}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 10
+      // Regex ^ ensures value is a valid integer less than 10
       setExtraChargePerSqFtValid(true);
     } else {
       setExtraChargePerSqFtValid(false);
@@ -113,7 +113,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleSqFt = value => {
     setSqFt(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000
+      // Regex ^ ensures value is a valid integer less than 1000
       setSqFtValid(true);
     } else {
       setSqFtValid(false);
@@ -123,7 +123,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleStgPrcFirstQuantity = value => {
     setStgPrcFirstQuantity(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000
+      // Regex ^ ensures value is a valid integer less than 1000
       setStgPrcFirstQuantityValid(true);
     } else {
       setStgPrcFirstQuantityValid(false);
@@ -133,7 +133,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleStgPrcFirstPercentageDiscount = value => {
     setStgPrcFirstPercentageDiscount(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 100
+      // Regex ^ ensures value is a valid integer less than 100
       setStgPrcFirstPercentageDiscountValid(true);
     } else {
       setStgPrcFirstPercentageDiscountValid(false);
@@ -143,7 +143,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleStgPrcSecondQuantity = value => {
     setStgPrcSecondQuantity(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value) && (parseInt(value) <= (999 - parseInt(stgPrcFirstQuantity))) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000
+      // Regex ^ ensures value is a valid integer less than 1000
       setStgPrcSecondQuantityValid(true);
     } else {
       setStgPrcSecondQuantityValid(false);
@@ -153,7 +153,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleStgPrcSecondPercentageDiscount = value => {
     setStgPrcSecondPercentageDiscount(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 100
+      // Regex ^ ensures value is a valid integer less than 100
       setStgPrcSecondPercentageDiscountValid(true);
     } else {
       setStgPrcSecondPercentageDiscountValid(false);
@@ -163,7 +163,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleStgPrcRemainingQuantity = value => {
     setStgPrcRemainingQuantity(value)
     if (/^[1-9]([0-9]{0,2}$)/g.test(value) && (parseInt(value) <= (999 - (parseInt(stgPrcFirstQuantity) + parseInt(stgPrcSecondQuantity)))) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000
+      // Regex ^ ensures value is a valid integer less than 1000
       setStgPrcRemainingQuantityValid(true);
     } else {
       setStgPrcRemainingQuantityValid(false);
@@ -173,7 +173,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleStgPrcRemainingPercentageDiscount = value => {
     setStgPrcRemainingPercentageDiscount(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 100
+      // Regex ^ ensures value is a valid integer less than 100
       setStgPrcRemainingPercentageDiscountValid(true);
     } else {
       setStgPrcRemainingPercentageDiscountValid(false);
@@ -183,7 +183,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleValueBasedItemsTotal = value => {
     setValueBasedItemsTotal(value)
     if (/^[1-9]([0-9]{0,5}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 1000000 (1 million)
+      // Regex ^ ensures value is a valid integer less than 1000000 (1 million)
       setValueBasedItemsTotalValid(true);
     } else {
       setValueBasedItemsTotalValid(false);
@@ -193,7 +193,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleValueBasedPercentageAsFee = value => {
     setValueBasedPercentageAsFee(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 100
+      // Regex ^ ensures value is a valid integer less than 100
       setValueBasedPercentageAsFeeValid(true);
     } else {
       setValueBasedPercentageAsFeeValid(false);
@@ -203,7 +203,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const handleValueBasedPercentageDiscount = value => {
     setValueBasedPercentageDiscount(value)
     if (/^[1-9]([0-9]{0,1}$)/g.test(value) || !value) {
-      // Regex ^ ensures value is a valid number less than 100
+      // Regex ^ ensures value is a valid integer less than 100
       setValueBasedPercentageDiscountValid(true);
     } else {
       setValueBasedPercentageDiscountValid(false);
@@ -219,13 +219,13 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           <div className="control is-expanded">
             <label className="label">Sq. ft. - Area occupied by large and/or fragile item(s)</label>
             <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" placeholder="Also specify cost! ->" name="" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
-            {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
+            {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 1,000</p>}
           </div>
 
           <div className="control is-expanded">
             <label className="label">$ - Cost per sq. ft.</label>
             <input className={extraChargePerSqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={extraChargePerSqFt} onChange={event => handleExtraChargePerSqFt(event.target.value)} />
-            {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $10</p>}
+            {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than $10</p>}
           </div>
         </div>
       </div>
@@ -244,7 +244,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             <div className="control">
               <input className={quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? 'input' : 'input is-danger'} type="text" name="" value={quantity} onChange={event => handleQuantity(event.target.value)} />
             </div>
-            {quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
+            {quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 1,000</p>}
           </div>
 
           <fieldset disabled={totalDiscountValue && totalDiscountValueValid}>
@@ -254,7 +254,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
               <div className="control">
                 <input className={totalDiscountPercentageValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountPercentage} onChange={event => handleTotalDiscountPercentage(event.target.value)} />
               </div>
-              {totalDiscountPercentageValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+              {totalDiscountPercentageValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 100</p>}
             </div>
           </fieldset>
 
@@ -265,7 +265,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
               <div className="control">
                 <input className={totalDiscountValueValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountValue} onChange={event => handleTotalDiscountValue(event.target.value)} />
               </div>
-              {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
+              {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than $1,000</p>}
             </div>
           </fieldset>
 
@@ -275,7 +275,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             <div className="control">
               <input className={conditionalDiscountTriggerValid ? 'input' : 'input is-danger'} type="text" name="" value={conditionalDiscountTrigger} onChange={event => handleConditionalDiscountTrigger(event.target.value)} />
             </div>
-            {conditionalDiscountTriggerValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000, and have a % or $ (flat) discount (specified above)</p>}
+            {conditionalDiscountTriggerValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than $1,000, and have a % or $ (flat) discount (specified above)</p>}
           </div>
         </fieldset>
       </React.Fragment>
@@ -293,12 +293,12 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             <div className="control is-expanded">
               <label className="label">#</label>
               <input className={stgPrcFirstQuantityValid ? 'input' : 'input is-danger'} type="text" name=""  value={stgPrcFirstQuantity} onChange={event => handleStgPrcFirstQuantity(event.target.value)} />
-              {stgPrcFirstQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
+              {stgPrcFirstQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 1,000</p>}
             </div>
             <div className="control is-expanded">
               <label className="label">% discount</label>
               <input className={stgPrcFirstPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcFirstPercentageDiscount} onChange={event => handleStgPrcFirstPercentageDiscount(event.target.value)} />
-              {stgPrcFirstPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+              {stgPrcFirstPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 100</p>}
             </div>
           </div>
 
@@ -308,12 +308,12 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
               <div className="control is-expanded">
                 <label className="label">#</label>
                 <input className={stgPrcSecondQuantityValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcSecondQuantity} onChange={event => handleStgPrcSecondQuantity(event.target.value)} />
-                {stgPrcSecondQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number, and a value, when added to the first and other sets, is less than 1,000</p>}
+                {stgPrcSecondQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer, and a value, when added to the first and other sets, is less than 1,000</p>}
               </div>
               <div className="control is-expanded">
                 <label className="label">% discount</label>
                 <input className={stgPrcSecondPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcSecondPercentageDiscount} onChange={event => handleStgPrcSecondPercentageDiscount(event.target.value)} />
-                {stgPrcSecondPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+                {stgPrcSecondPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 100</p>}
               </div>
             </div>
           </fieldset>
@@ -324,12 +324,12 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
               <div className="control is-expanded">
                 <label className="label">#</label>
                 <input className={stgPrcRemainingQuantityValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcRemainingQuantity} onChange={event => handleStgPrcRemainingQuantity(event.target.value)} />
-                {stgPrcRemainingQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number, and a value, when added to the first and second sets, is less than 1,000</p>}
+                {stgPrcRemainingQuantityValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer, and a value, when added to the first and second sets, is less than 1,000</p>}
               </div>
               <div className="control is-expanded">
                 <label className="label">% discount</label>
                 <input className={stgPrcRemainingPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={stgPrcRemainingPercentageDiscount} onChange={event => handleStgPrcRemainingPercentageDiscount(event.target.value)} />
-                {stgPrcRemainingPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+                {stgPrcRemainingPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 100</p>}
               </div>
             </div>
           </fieldset>
@@ -348,19 +348,19 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             <div className="control is-expanded">
               <label className="label">Total value of item(s)</label>
               <input className={valueBasedItemsTotalValid ? 'input' : 'input is-danger'} type="text" placeholder="Also specify percentage! ->" name="" value={valueBasedItemsTotal} onChange={event => handleValueBasedItemsTotal(event.target.value)} />
-              {valueBasedItemsTotalValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000,000</p>}
+              {valueBasedItemsTotalValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than $1,000,000</p>}
             </div>
 
             <div className="control is-expanded">
               <label className="label">% of item(s) value as storage fee</label>
               <input className={valueBasedPercentageAsFeeValid ? 'input' : 'input is-danger'} type="text" name="" value={valueBasedPercentageAsFee} onChange={event => handleValueBasedPercentageAsFee(event.target.value)} />
-              {valueBasedPercentageAsFeeValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+              {valueBasedPercentageAsFeeValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 100</p>}
             </div>
 
             <div className="control is-expanded">
               <label className="label">% discount</label>
               <input className={valueBasedPercentageDiscountValid ? 'input' : 'input is-danger'} type="text" name="" value={valueBasedPercentageDiscount} onChange={event => handleValueBasedPercentageDiscount(event.target.value)} />
-              {valueBasedPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+              {valueBasedPercentageDiscountValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 100</p>}
             </div>
           </div>
         </fieldset>
