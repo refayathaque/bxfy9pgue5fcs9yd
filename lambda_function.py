@@ -33,6 +33,9 @@ staggered_pricing_event_3 = {'quantity': '', 'totalDiscountPercentage': '', 'tot
 context = 'test'
 
 def staggered_pricing(event, flat_fee):
+    if event['extraChargePerSqFt']:
+        fee = fee + (float(event['extraChargePerSqFt']) * float(event['sqFt']))
+        
     fee_first = float(event['stgPrcFirstQuantity']) * flat_fee
     if event['stgPrcFirstPercentageDiscount']:
         fee_first = fee_first * (1 - (float(event['stgPrcFirstPercentageDiscount'])/100))

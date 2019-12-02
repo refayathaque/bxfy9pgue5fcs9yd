@@ -214,10 +214,10 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     return (
       <React.Fragment>
         <div className="is-italic">* You may only apply these <u>extra charges</u> to <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
-        
+
         <div className="field is-grouped">
           <div className="control is-expanded">
-            <label className="label">Sq. Ft. - Area occupied by large and/or fragile item(s)</label>
+            <label className="label">Sq. ft. - Area occupied by large and/or fragile item(s)</label>
             <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
             {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
           </div>
@@ -344,7 +344,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
         <h6 className="subtitle is-6">__________________________________</h6>
         <h4 className="subtitle is-4">Value-Based Pricing</h4>
 
-        <fieldset disabled={(stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (quantity && quantityValid) || (extraChargePerSqFt && extraChargePerSqFtValid)}>
+        <fieldset disabled={(stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (quantity && quantityValid) || (sqFt && sqFtValid) || (extraChargePerSqFt && extraChargePerSqFtValid)}>
           <div className="field is-grouped">
             <div className="control is-expanded">
               <label className="label">Total value of item(s)</label>
