@@ -218,7 +218,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
         <div className="field is-grouped">
           <div className="control is-expanded">
             <label className="label">Sq. ft. - Area occupied by large and/or fragile item(s)</label>
-            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" name="" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
+            <input className={sqFtValid ? 'input' : 'input is-danger'} type="text" placeholder="Also specify cost! ->" name="" value={sqFt} onChange={event => handleSqFt(event.target.value)} />
             {sqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
           </div>
 
