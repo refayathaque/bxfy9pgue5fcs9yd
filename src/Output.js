@@ -9,12 +9,12 @@ const Output = ({postCustomPricingReducer}) => {
         <div className="tile">
           <article className="tile is-child notification is-info">
             <p className="title">Quote</p>
-            <p className="subtitle">Pricing:</p>
-            <div className="content">
-              Monthly:
+            <p className="subtitle">Pricing Structure</p>
+            <div className="content is-italic">
+              Monthly Fee:
             </div>
-            <div className="content">
-              Yearly:
+            <div className="content is-italic">
+              Yearly Fee:
             </div>
           </article>
         </div>
@@ -24,12 +24,12 @@ const Output = ({postCustomPricingReducer}) => {
         <div className="tile">
           <article className="tile is-child notification is-info">
             <p className="title">Quote</p>
-            <p className="subtitle">Pricing:</p>
-            <div className="content">
-              Monthly:
+            <p className="subtitle">Pricing Structure</p>
+            <div className="content is-italic">
+              Monthly Fee:
             </div>
-            <div className="content">
-              Yearly:
+            <div className="content is-italic">
+              Yearly Fee:
             </div>
           </article>
         </div>
@@ -41,10 +41,10 @@ const Output = ({postCustomPricingReducer}) => {
             <p className="title">Quote</p>
             <p className="subtitle">{postCustomPricingReducer.response.data.structure}</p>
             <div className="content">
-              Monthly: C$ {postCustomPricingReducer.response.data.quote_monthly}
+              <span className="is-italic">Monthly Fee:</span> C$ {postCustomPricingReducer.response.data.quote_monthly}
             </div>
             <div className="content">
-              Yearly: C$ {postCustomPricingReducer.response.data.quote_yearly}
+              <span className="is-italic">Yearly Fee:</span> C$ {postCustomPricingReducer.response.data.quote_yearly}
             </div>
           </article>
         </div>

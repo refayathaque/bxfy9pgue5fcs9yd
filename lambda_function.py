@@ -119,7 +119,7 @@ def lambda_handler(event, context):
         print('Standard Pricing Quote:', standard_pricing(event, flat_fee))
         return {
             'statusCode': 200,
-            'structure': json.dumps("Standard Pricing"),
+            'structure': json.dumps('Standard Pricing'),
             'quote_monthly': json.dumps(standard_pricing(event, flat_fee)),
             'quote_yearly': json.dumps(round(standard_pricing(event, flat_fee) * 12))
         }
@@ -128,7 +128,7 @@ def lambda_handler(event, context):
         print('Staggered Pricing Quote:', staggered_pricing(event, flat_fee))
         return {
             'statusCode': 200,
-            'structure': json.dumps("Staggered Pricing"),
+            'structure': json.dumps('Staggered Pricing'),
             'quote_monthly': json.dumps(staggered_pricing(event, flat_fee)),
             'quote_yearly': json.dumps(round(staggered_pricing(event, flat_fee) * 12))
         }
@@ -137,7 +137,7 @@ def lambda_handler(event, context):
         print('Value-Based Pricing Quote:', value_based_pricing(event))
         return {
             'statusCode': 200,
-            'structure': json.dumps("Value-Based Pricing"),
+            'structure': json.dumps('Value-Based Pricing'),
             'quote_monthly': json.dumps(value_based_pricing(event)),
             'quote_yearly': json.dumps(round(value_based_pricing(event) * 12, 2))
         }
