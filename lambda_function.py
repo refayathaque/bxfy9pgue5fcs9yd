@@ -30,12 +30,23 @@ staggered_pricing_event_2 = {'quantity': '', 'totalDiscountPercentage': '', 'tot
 staggered_pricing_event_3 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '12', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '12', 'stgPrcRemainingPercentageDiscount': '12', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
+staggered_pricing_event_4 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '7', 'sqFt': '145', 'stgPrcFirstQuantity': '12', 'stgPrcFirstPercentageDiscount': '67', 'stgPrcSecondQuantity': '5', 'stgPrcSecondPercentageDiscount': '5', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+# works
+
+staggered_pricing_event_5 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '3', 'sqFt': '2', 'stgPrcFirstQuantity': '78', 'stgPrcFirstPercentageDiscount': '12', 'stgPrcSecondQuantity': '95', 'stgPrcSecondPercentageDiscount': '2', 'stgPrcRemainingQuantity': '88', 'stgPrcRemainingPercentageDiscount': '0.8', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+# works
+
+staggered_pricing_event_6 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '9', 'sqFt': '4', 'stgPrcFirstQuantity': '14', 'stgPrcFirstPercentageDiscount': '3', 'stgPrcSecondQuantity': '17', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '45', 'stgPrcRemainingPercentageDiscount': '32', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
+# works
+
 context = 'test'
 
 def staggered_pricing(event, flat_fee):
     if event['extraChargePerSqFt']:
-        fee = fee + (float(event['extraChargePerSqFt']) * float(event['sqFt']))
-        
+        extra_charge = (float(event['extraChargePerSqFt']) * float(event['sqFt']))
+    else:
+        extra_charge = 0
+
     fee_first = float(event['stgPrcFirstQuantity']) * flat_fee
     if event['stgPrcFirstPercentageDiscount']:
         fee_first = fee_first * (1 - (float(event['stgPrcFirstPercentageDiscount'])/100))
@@ -50,35 +61,12 @@ def staggered_pricing(event, flat_fee):
             if event['stgPrcRemainingPercentageDiscount']:
                 fee_remaining = fee_remaining * (1 - (float(event['stgPrcRemainingPercentageDiscount'])/100))
                 print('Remaining Set After Discount:', fee_remaining)
-            return round(fee_first + fee_second + fee_remaining, 2)
-        return round(fee_first + fee_second, 2)
-    return round(fee_first, 2)
 
-def lambda_handler(event, context):
-    # flat_fee = float(os.environ['flat_fee'])
-    flat_fee = 20
-    if event['quantity']:
-        # standard pricing
-        print('Standard Pricing Quote:', standard_pricing(event, flat_fee))
-        return {
-            'statusCode': 200,
-            'body': json.dumps("Standard Pricing")
-        }
+            return round(extra_charge + fee_first + fee_second + fee_remaining, 2)
 
-    if event['stgPrcFirstQuantity']:
-        # staggered pricing
-        print('Staggered Pricing Quote:', staggered_pricing(event, flat_fee))
-        return {
-            'statusCode': 200,
-            'body': json.dumps("Staggered Pricing")
-        }
+        return round(extra_charge + fee_first + fee_second, 2)
 
-    if event['valueBasedItemsTotal']:
-        # value-based pricing
-        return {
-            'statusCode': 200,
-            'body': json.dumps("Value-Based Pricing")
-        }
+    return round(extra_charge + fee_first, 2)
 
 def standard_pricing(event, flat_fee):
     fee = float(event['quantity']) * flat_fee
@@ -86,6 +74,7 @@ def standard_pricing(event, flat_fee):
     if event['extraChargePerSqFt']:
         fee = fee + (float(event['extraChargePerSqFt']) * float(event['sqFt']))
     print('(Quantity * Flat Fee) + Extra Charges:', fee)
+
     if (event['totalDiscountPercentage'] or event['totalDiscountValue']) and (not event['conditionalDiscountTrigger']):
         print('No Conditional Discount Trigger')
         if event['totalDiscountPercentage']:
@@ -103,4 +92,28 @@ def standard_pricing(event, flat_fee):
     return round(fee, 2)
     # https://tutorialdeep.com/knowhow/round-float-to-2-decimal-places-python/
 
-lambda_handler(staggered_pricing_event_2, context)
+def lambda_handler(event, context):
+    # flat_fee = float(os.environ['flat_fee'])
+    flat_fee = 20
+    if event['quantity']:
+        # standard pricing
+        print('Standard Pricing Quote:', standard_pricing(event, flat_fee))
+        return {
+            'statusCode': 200,
+            'body': json.dumps("Standard Pricing")
+        }
+    if event['stgPrcFirstQuantity']:
+        # staggered pricing
+        print('Staggered Pricing Quote:', staggered_pricing(event, flat_fee))
+        return {
+            'statusCode': 200,
+            'body': json.dumps("Staggered Pricing")
+        }
+    if event['valueBasedItemsTotal']:
+        # value-based pricing
+        return {
+            'statusCode': 200,
+            'body': json.dumps("Value-Based Pricing")
+        }
+
+lambda_handler(staggered_pricing_event_6, context)

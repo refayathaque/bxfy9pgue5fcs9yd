@@ -6,20 +6,47 @@ const Output = ({postCustomPricingReducer}) => {
   const renderResponse = () => {
     if (postCustomPricingReducer.status === "") {
       return (
-        <div>
-          I have nothing to show you
+        <div class="tile">
+          <article class="tile is-child notification is-info">
+            <p class="title">Quote</p>
+            <p class="subtitle">Pricing:</p>
+            <div class="content">
+              Monthly:
+            </div>
+            <div class="content">
+              Yearly:
+            </div>
+          </article>
         </div>
       )
     } else if (postCustomPricingReducer.status === "waiting") {
       return (
-        <div>
-          I ALMOST have something to show you
+        <div class="tile">
+          <article class="tile is-child notification is-info">
+            <p class="title">Quote</p>
+            <p class="subtitle">Pricing:</p>
+            <div class="content">
+              Monthly:
+            </div>
+            <div class="content">
+              Yearly:
+            </div>
+          </article>
         </div>
       )
     } else if (postCustomPricingReducer.status === "received") {
       return (
-        <div>
-          I have something to show you {postCustomPricingReducer.response.data.body}
+        <div class="tile">
+          <article class="tile is-child notification is-info">
+            <p class="title">Quote</p>
+            <p class="subtitle">Pricing:</p>
+            <div class="content">
+              Monthly: {postCustomPricingReducer.response.data.body}
+            </div>
+            <div class="content">
+              Yearly:
+            </div>
+          </article>
         </div>
       )
     }

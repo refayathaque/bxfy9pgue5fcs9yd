@@ -212,7 +212,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   const renderExtraChargeSqFt = () => {
     return (
-      <React.Fragment>
+      <div style={{ paddingBottom: '1.5rem' }}>
         <div className="is-italic">* You may only apply these <u>extra charges</u> to <span className="has-text-weight-bold">standard</span> and <span className="has-text-weight-bold">staggered</span> pricing</div>
 
         <div className="field is-grouped">
@@ -228,7 +228,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             {extraChargePerSqFtValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $10</p>}
           </div>
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 
@@ -340,8 +340,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   const renderValueBasedPricing = () => {
     return (
-      <React.Fragment>
-        <h6 className="subtitle is-6">__________________________________</h6>
+      <div style={{ borderTop: '1px solid #4A4A4A', paddingTop: '1rem', paddingBottom: '1.5rem' }}>
         <h4 className="subtitle is-4">Value-Based Pricing</h4>
 
         <fieldset disabled={(stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (quantity && quantityValid) || (sqFt && sqFtValid) || (extraChargePerSqFt && extraChargePerSqFtValid)}>
@@ -365,19 +364,18 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
             </div>
           </div>
         </fieldset>
-      </React.Fragment>
+      </div>
     )
   }
 
   const renderButton = () => {
     return (
-      <React.Fragment>
-        <h6 className="subtitle is-6">__________________________________</h6>
+      <div style={{ borderTop: '1px solid #4A4A4A', paddingTop: '1.5rem' }}>
         <button className={`button is-info is-outlined is-fullwidth ${postCustomPricingReducer.status === "waiting" ? "is-loading" : ""}`} disabled={(quantity && quantityValid) || (stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid) ? '' : 'disabled'} onClick={handleSubmit}>
           {/* https://stackoverflow.com/a/51183104/8379751 */}
           Provide quotes
         </button>
-      </React.Fragment>
+      </div>
     )
   }
 
