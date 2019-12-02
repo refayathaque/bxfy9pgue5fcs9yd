@@ -381,7 +381,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
 
   return (
     <React.Fragment>
-      <div>Submit the form below to receive both monthly and yearly quotes for your prospective customer:</div>
+      <div>Submit a form below to receive both monthly and yearly quotes for your prospective customer:</div>
       <h6 className="subtitle is-6 is-italic">* You may <span className="has-text-weight-bold">only</span> use <u>either</u> standard, staggered or value-based pricing structures</h6>
       <div className="columns">
         <div className="column is-5">

@@ -100,20 +100,26 @@ def lambda_handler(event, context):
         print('Standard Pricing Quote:', standard_pricing(event, flat_fee))
         return {
             'statusCode': 200,
-            'body': json.dumps("Standard Pricing")
+            'structure': json.dumps("Standard Pricing"),
+            'quote_monthly': standard_pricing(event, flat_fee)
+            'quote_yearly': standard_pricing(event, flat_fee) * 12
         }
     if event['stgPrcFirstQuantity']:
         # staggered pricing
         print('Staggered Pricing Quote:', staggered_pricing(event, flat_fee))
         return {
             'statusCode': 200,
-            'body': json.dumps("Staggered Pricing")
+            'structure': json.dumps("Staggered Pricing"),
+            'quote_monthly': staggered_pricing(event, flat_fee)
+            'quote_yearly': staggered_pricing(event, flat_fee) * 12
         }
     if event['valueBasedItemsTotal']:
         # value-based pricing
         return {
             'statusCode': 200,
-            'body': json.dumps("Value-Based Pricing")
+            'structure': json.dumps("Value-Based Pricing"),
+            'quote_monthly': value_based_pricing(event, flat_fee)
+            'quote_yearly': value_based_pricing(event, flat_fee) * 12
         }
 
 lambda_handler(staggered_pricing_event_6, context)
