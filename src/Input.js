@@ -232,6 +232,56 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     )
   }
 
+  const renderStandardPricing = () => {
+    return (
+      <React.Fragment>
+        <h4 className="subtitle is-4">Standard Pricing</h4>
+
+        <fieldset disabled={(stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid)}>
+          <div className="is-italic">Total number of items stored</div>
+          <div className="field">
+            <label className="label">#</label>
+            <div className="control">
+              <input className={quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? 'input' : 'input is-danger'} type="text" name="" value={quantity} onChange={event => handleQuantity(event.target.value)} />
+            </div>
+            {quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
+          </div>
+
+          <fieldset disabled={totalDiscountValue && totalDiscountValueValid}>
+            <div className="is-italic">Discount on monthly storage fee</div>
+            <div className="field">
+              <label className="label">%</label>
+              <div className="control">
+                <input className={totalDiscountPercentageValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountPercentage} onChange={event => handleTotalDiscountPercentage(event.target.value)} />
+              </div>
+              {totalDiscountPercentageValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
+            </div>
+          </fieldset>
+
+          <fieldset style={{ paddingTop: '0.75rem' }} disabled={totalDiscountPercentage && totalDiscountPercentageValid}>
+            <div className="is-italic">Discount on monthly storage fee (flat)</div>
+            <div className="field">
+              <label className="label">$</label>
+              <div className="control">
+                <input className={totalDiscountValueValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountValue} onChange={event => handleTotalDiscountValue(event.target.value)} />
+              </div>
+              {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
+            </div>
+          </fieldset>
+
+          <div style={{ paddingTop: '0.75rem' }} className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee reaches the amount, a % or $ (flat) discount (specified above) is applied</div>
+          <div className="field">
+            <label className="label">$</label>
+            <div className="control">
+              <input className={conditionalDiscountTriggerValid ? 'input' : 'input is-danger'} type="text" name="" value={conditionalDiscountTrigger} onChange={event => handleConditionalDiscountTrigger(event.target.value)} />
+            </div>
+            {conditionalDiscountTriggerValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000, and have a % or $ (flat) discount (specified above)</p>}
+          </div>
+        </fieldset>
+      </React.Fragment>
+    )
+  }
+
   const renderStaggeredPricing = () => {
     return (
       <React.Fragment>
@@ -288,56 +338,6 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
     )
   }
 
-  const renderStandardPricing = () => {
-    return (
-      <React.Fragment>
-        <h4 className="subtitle is-4">Standard Pricing</h4>
-
-        <fieldset disabled={(stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid)}>
-          <div className="is-italic">Total number of items stored</div>
-          <div className="field">
-            <label className="label">#</label>
-            <div className="control">
-              <input className={quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? 'input' : 'input is-danger'} type="text" name="" value={quantity} onChange={event => handleQuantity(event.target.value)} />
-            </div>
-            {quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 1,000</p>}
-          </div>
-
-          <fieldset disabled={totalDiscountValue && totalDiscountValueValid}>
-            <div className="is-italic">Discount on monthly storage fee</div>
-            <div className="field">
-              <label className="label">%</label>
-              <div className="control">
-                <input className={totalDiscountPercentageValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountPercentage} onChange={event => handleTotalDiscountPercentage(event.target.value)} />
-              </div>
-              {totalDiscountPercentageValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than 100</p>}
-            </div>
-          </fieldset>
-
-          <fieldset style={{ paddingTop: '0.75rem' }} disabled={totalDiscountPercentage && totalDiscountPercentageValid}>
-            <div className="is-italic">Discount on monthly storage fee (flat)</div>
-            <div className="field">
-              <label className="label">$</label>
-              <div className="control">
-                <input className={totalDiscountValueValid ? 'input' : 'input is-danger'} type="text" name="" value={totalDiscountValue} onChange={event => handleTotalDiscountValue(event.target.value)} />
-              </div>
-              {totalDiscountValueValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000</p>}
-            </div>
-          </fieldset>
-
-          <div style={{ paddingTop: '0.75rem' }} className="is-italic has-text-justified">Conditional discount trigger, i.e., when the monthly storage fee reaches the amount, a % or $ (flat) discount (specified above) is applied</div>
-          <div className="field">
-            <label className="label">$</label>
-            <div className="control">
-              <input className={conditionalDiscountTriggerValid ? 'input' : 'input is-danger'} type="text" name="" value={conditionalDiscountTrigger} onChange={event => handleConditionalDiscountTrigger(event.target.value)} />
-            </div>
-            {conditionalDiscountTriggerValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000, and have a % or $ (flat) discount (specified above)</p>}
-          </div>
-        </fieldset>
-      </React.Fragment>
-    )
-  }
-
   const renderValueBasedPricing = () => {
     return (
       <div style={{ borderTop: '1px solid #4A4A4A', paddingTop: '1rem', paddingBottom: '1.5rem' }}>
@@ -347,7 +347,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           <div className="field is-grouped">
             <div className="control is-expanded">
               <label className="label">Total value of item(s)</label>
-              <input className={valueBasedItemsTotalValid ? 'input' : 'input is-danger'} type="text" name="" value={valueBasedItemsTotal} onChange={event => handleValueBasedItemsTotal(event.target.value)} />
+              <input className={valueBasedItemsTotalValid ? 'input' : 'input is-danger'} type="text" placeholder="Also specify percentage! ->" name="" value={valueBasedItemsTotal} onChange={event => handleValueBasedItemsTotal(event.target.value)} />
               {valueBasedItemsTotalValid ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid number and an amount less than $1,000,000</p>}
             </div>
 

@@ -39,7 +39,37 @@ staggered_pricing_event_5 = {'quantity': '', 'totalDiscountPercentage': '', 'tot
 staggered_pricing_event_6 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '9', 'sqFt': '4', 'stgPrcFirstQuantity': '14', 'stgPrcFirstPercentageDiscount': '3', 'stgPrcSecondQuantity': '17', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '45', 'stgPrcRemainingPercentageDiscount': '32', 'valueBasedItemsTotal': '', 'valueBasedPercentageAsFee': '', 'valueBasedPercentageDiscount': ''}
 # works
 
+value_based_pricing_event_1 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '779', 'valueBasedPercentageAsFee': '6', 'valueBasedPercentageDiscount': '4'}
+# works
+
+value_based_pricing_event_2 = {'quantity': '', 'totalDiscountPercentage': '', 'totalDiscountValue': '', 'conditionalDiscountTrigger': '', 'extraChargePerSqFt': '', 'sqFt': '', 'stgPrcFirstQuantity': '', 'stgPrcFirstPercentageDiscount': '', 'stgPrcSecondQuantity': '', 'stgPrcSecondPercentageDiscount': '', 'stgPrcRemainingQuantity': '', 'stgPrcRemainingPercentageDiscount': '', 'valueBasedItemsTotal': '19', 'valueBasedPercentageAsFee': '9', 'valueBasedPercentageDiscount': ''}
+# works
+
 context = 'test'
+
+def standard_pricing(event, flat_fee):
+    fee = float(event['quantity']) * flat_fee
+    print('Quantity * Flat Fee:', fee)
+    if event['extraChargePerSqFt']:
+        fee = fee + (float(event['extraChargePerSqFt']) * float(event['sqFt']))
+    print('(Quantity * Flat Fee) + Extra Charges:', fee)
+
+    if (event['totalDiscountPercentage'] or event['totalDiscountValue']) and (not event['conditionalDiscountTrigger']):
+        print('No Conditional Discount Trigger')
+        if event['totalDiscountPercentage']:
+            fee = fee * (1 - (float(event['totalDiscountPercentage'])/100))
+        if event['totalDiscountValue']:
+            fee = ((fee) - float(event['totalDiscountValue']))
+    if event['conditionalDiscountTrigger']:
+        print('Conditional Discount Trigger')
+        if fee >= float(event['conditionalDiscountTrigger']):
+            if event['totalDiscountPercentage']:
+                fee = fee * (1 - (float(event['totalDiscountPercentage'])/100))
+            if event['totalDiscountValue']:
+                fee = ((fee) - float(event['totalDiscountValue']))
+
+    return round(fee, 2)
+    # https://tutorialdeep.com/knowhow/round-float-to-2-decimal-places-python/
 
 def staggered_pricing(event, flat_fee):
     if event['extraChargePerSqFt']:
@@ -68,29 +98,18 @@ def staggered_pricing(event, flat_fee):
 
     return round(extra_charge + fee_first, 2)
 
-def standard_pricing(event, flat_fee):
-    fee = float(event['quantity']) * flat_fee
-    print('Quantity * Flat Fee:', fee)
-    if event['extraChargePerSqFt']:
-        fee = fee + (float(event['extraChargePerSqFt']) * float(event['sqFt']))
-    print('(Quantity * Flat Fee) + Extra Charges:', fee)
+def value_based_pricing(event):
+    print(float(event['valueBasedItemsTotal']))
+    print(float(event['valueBasedPercentageAsFee'])/100)
+    fee = float(event['valueBasedItemsTotal']) * (float(event['valueBasedPercentageAsFee'])/100)
+    if event['valueBasedPercentageDiscount']:
+        print('Percentage Discount')
+        fee = fee * (1 - (float(event['valueBasedPercentageDiscount'])/100))
 
-    if (event['totalDiscountPercentage'] or event['totalDiscountValue']) and (not event['conditionalDiscountTrigger']):
-        print('No Conditional Discount Trigger')
-        if event['totalDiscountPercentage']:
-            fee = fee * (1 - (float(event['totalDiscountPercentage'])/100))
-        if event['totalDiscountValue']:
-            fee = ((fee) - float(event['totalDiscountValue']))
-    if event['conditionalDiscountTrigger']:
-        print('Conditional Discount Trigger')
-        if fee >= float(event['conditionalDiscountTrigger']):
-            if event['totalDiscountPercentage']:
-                fee = fee * (1 - (float(event['totalDiscountPercentage'])/100))
-            if event['totalDiscountValue']:
-                fee = ((fee) - float(event['totalDiscountValue']))
+        return round(fee, 2)
 
     return round(fee, 2)
-    # https://tutorialdeep.com/knowhow/round-float-to-2-decimal-places-python/
+
 
 def lambda_handler(event, context):
     # flat_fee = float(os.environ['flat_fee'])
@@ -101,7 +120,7 @@ def lambda_handler(event, context):
         return {
             'statusCode': 200,
             'structure': json.dumps("Standard Pricing"),
-            'quote_monthly': standard_pricing(event, flat_fee)
+            'quote_monthly': standard_pricing(event, flat_fee),
             'quote_yearly': standard_pricing(event, flat_fee) * 12
         }
     if event['stgPrcFirstQuantity']:
@@ -110,16 +129,17 @@ def lambda_handler(event, context):
         return {
             'statusCode': 200,
             'structure': json.dumps("Staggered Pricing"),
-            'quote_monthly': staggered_pricing(event, flat_fee)
+            'quote_monthly': staggered_pricing(event, flat_fee),
             'quote_yearly': staggered_pricing(event, flat_fee) * 12
         }
     if event['valueBasedItemsTotal']:
         # value-based pricing
+        print('Value-Based Pricing Quote:', value_based_pricing(event))
         return {
             'statusCode': 200,
             'structure': json.dumps("Value-Based Pricing"),
-            'quote_monthly': value_based_pricing(event, flat_fee)
-            'quote_yearly': value_based_pricing(event, flat_fee) * 12
+            # 'quote_monthly': value_based_pricing(event),
+            # 'quote_yearly': value_based_pricing(event) * 12
         }
 
-lambda_handler(staggered_pricing_event_6, context)
+lambda_handler(value_based_pricing_event_2, context)
