@@ -242,9 +242,9 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
           <div className="field">
             <label className="label">#</label>
             <div className="control">
-              <input className={quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? 'input' : 'input is-danger'} type="text" name="" value={quantity} onChange={event => handleQuantity(event.target.value)} />
+              <input className={quantityValid || stgPrcFirstQuantity || valueBasedItemsTotal ? 'input' : 'input is-danger'} type="text" name="" value={quantity} onChange={event => handleQuantity(event.target.value)} />
             </div>
-            {quantityValid || stgPrcFirstQuantity || stgPrcSecondQuantity || stgPrcRemainingQuantity ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 1,000</p>}
+            {quantityValid || stgPrcFirstQuantity || valueBasedItemsTotal ? <React.Fragment></React.Fragment> : <p className="help is-danger">Must be a valid integer and an amount less than 1,000</p>}
           </div>
 
           <fieldset disabled={totalDiscountValue && totalDiscountValueValid}>
@@ -371,7 +371,7 @@ const Input = ({ postCustomPricing, postCustomPricingReducer }) => {
   const renderButton = () => {
     return (
       <div style={{ borderTop: '1px solid #4A4A4A', paddingTop: '1.5rem' }}>
-        <button className={`button is-info is-outlined is-fullwidth ${postCustomPricingReducer.status === "waiting" ? "is-loading" : ""}`} disabled={(quantity && quantityValid) || (stgPrcFirstQuantity && stgPrcFirstQuantityValid) || (valueBasedItemsTotal && valueBasedItemsTotalValid) ? '' : 'disabled'} onClick={handleSubmit}>
+        <button className={`button is-info is-outlined is-fullwidth ${postCustomPricingReducer.status === "waiting" ? "is-loading" : ""}`} disabled={(quantity && quantityValid) || (stgPrcFirstQuantity && stgPrcFirstQuantityValid) || ((valueBasedItemsTotal && valueBasedItemsTotalValid) && (valueBasedPercentageAsFee && valueBasedPercentageAsFeeValid)) ? '' : 'disabled'} onClick={handleSubmit}>
           {/* https://stackoverflow.com/a/51183104/8379751 */}
           Provide quotes
         </button>
