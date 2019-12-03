@@ -4,7 +4,7 @@
 - `lambda_function.py`
   - Backend logic carrying out quote processing based on requests made from client-side (requests to lambda function are in the form of `event` objects/dictionaries)
   - I.e., the lambda function is what calculates the quote based on the data coming in from the client-side forms
-- `Input.js`
+- `src/Input.js`
   - Frontend logic and data capture is done here, frontend logic doing things like ensuring that the user cannot fill out more than one `Pricing` form (e.g., cannot fill out both `Standard Pricing` and `Staggered Pricing`)
     - Other frontend logic example includes blocking out the flat fee discount if the percentage discount is specified, and vice versa, in the `Standard Pricing` form
 
