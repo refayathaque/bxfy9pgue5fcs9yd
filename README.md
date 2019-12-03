@@ -2,12 +2,11 @@
 
 ### Files:
 - `lambda_function.py`
-  - Backend logic carrying out quote processing based on requests made from client (requests to lambda function are in the form of `event` objects/dictionaries)
-  - I.e., the lambda function is what calculates the quote based on the data coming in from the forms in the client
-- Input.js
-  - Frontend logic and data capture done here, frontend logic does things like ensure that the user cannot fill out more than one `Pricing` form (e.g., cannot fill out both `Standard Pricing` and `Staggered Pricing`)
-    - Other frontend logic example include blocking out the flat fee discount if % discount is specified, and vice versa, in the `Standard Pricing` form
-  -
+  - Backend logic carrying out quote processing based on requests made from client-side (requests to lambda function are in the form of `event` objects/dictionaries)
+  - I.e., the lambda function is what calculates the quote based on the data coming in from the client-side forms
+- `Input.js`
+  - Frontend logic and data capture is done here, frontend logic doing things like ensuring that the user cannot fill out more than one `Pricing` form (e.g., cannot fill out both `Standard Pricing` and `Staggered Pricing`)
+    - Other frontend logic example includes blocking out the flat fee discount if the percentage discount is specified, and vice versa, in the `Standard Pricing` form
 
 ### Documentation:
 - "The flat fee for storing a single item is $20."
